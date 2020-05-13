@@ -39,7 +39,8 @@ def generate_sprites(factor_dist, num_sprites=1):
   def _generate():
     n = num_sprites() if callable(num_sprites) else num_sprites
     sprites = [sprite.Sprite(**factor_dist.sample()) for _ in range(n)]
-    print(sprites)
+    print(sprites.x)
+    print(sprites.shape)
     return sprites
 
   return _generate
