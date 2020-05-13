@@ -40,9 +40,7 @@ def generate_sprites(factor_dist, num_sprites=1):
   def _generate():
     n = num_sprites() if callable(num_sprites) else num_sprites
     sprites = [sprite.Sprite(**factor_dist.sample()) for _ in range(n)]
-    '''
-    test = torch.Tensor()
-    sprites[0].shape
+
     a = sprites[0].x[0]
     b = sprites[0].y[0]
     c = sprites[0].angle[0]
@@ -51,7 +49,7 @@ def generate_sprites(factor_dist, num_sprites=1):
 
     test = torch.Tensor([a,b,c,d,e])
     print(test)
-    '''
+
 
     return sprites
 
