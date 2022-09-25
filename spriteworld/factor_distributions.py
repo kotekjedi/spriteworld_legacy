@@ -203,6 +203,7 @@ class Discrete(AbstractDistribution):
       self.candidates = ['square']
     rng = self._get_rng(rng)
     out = self.candidates[rng.choice(len(self.candidates), p=self.probs)]
+    print(out)
     return {self.key: out}
 
   def contains(self, spec):
