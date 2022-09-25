@@ -27,7 +27,6 @@ from scipy.stats import norm
 import scipy
 
 def generate_sprites(factor_dist, num_sprites=1):
-  print("hiiii")
   """Create callable that samples sprites from a factor distribution.
   Args:
     factor_dist: The factor distribution from which to sample. Should be an
@@ -47,10 +46,7 @@ def generate_sprites(factor_dist, num_sprites=1):
     gaussian = np.random.multivariate_normal(mean, cov, 1)
     uniform = norm.cdf(gaussian)
     n = num_sprites() if callable(num_sprites) else num_sprites
-    sprites = [sprite.Sprite(**factor_dist.sample(uniform)) for _ in range(n)]
-
-    sprites[0]._shape = "triangle"
-    sprites[1]._shape = "square"
+    sprites = [sprite.Sprite(**factor_dist.sample(uniform,n)) for _ in range(n)]
 
     return sprites
 
@@ -79,7 +75,6 @@ def chain_generators(*sprite_generators):
 
 
 def sample_generator(sprite_generators, p=None):
-  print("hello world")
   """Sample one element from a set of sprite generators.
   Essential an 'OR' operation over sprite generators. This returns a callable
   that samples a generator from sprite_generators and calls it.
