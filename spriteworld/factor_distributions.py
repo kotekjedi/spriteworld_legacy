@@ -50,7 +50,7 @@ class AbstractDistribution(object):
   """Abstract class from which all distributions should inherit."""
 
   @abc.abstractmethod
-  def sample(self,rng=None):
+  def sample(self,n=None,rng=None):
     """Sample a spec from this distribution. Returns a dictionary.
     Args:
       rng: Random number generator. Fed into self._get_rng(), if None defaults
@@ -93,7 +93,7 @@ class Continuous(AbstractDistribution):
     self.maxval = maxval
     self.dtype = dtype
 
-  def sample(self,uniform, rng=None):
+  def sample(self,uniform, n=None, rng=None):
     """Sample value in [self.minval, self.maxval) and return dict."""
     rng = self._get_rng(rng)
     out = rng.uniform(low=self.minval, high=self.maxval)
@@ -135,7 +135,7 @@ class Beta(AbstractDistribution):
     self.non_ident = non_ident
     self.dtype = dtype
 
-  def sample(self,uniform,rng=None):
+  def sample(self,uniform,n=None,rng=None):
     """Sample value in [self.minval, self.maxval) and return dict."""
 
     if self.non_ident == False:
@@ -195,7 +195,11 @@ class Discrete(AbstractDistribution):
     self.key = key
     self.probs = probs
 
-  def sample(self, uniform, rng=None):
+  def sample(self, uniform, n=None, rng=None):
+    if n == 0:
+      self.candidates = ['triangle']
+    elif n == 1:
+      self.candidates = ['square']
     rng = self._get_rng(rng)
     out = self.candidates[rng.choice(len(self.candidates), p=self.probs)]
     return {self.key: out}
@@ -243,7 +247,7 @@ class Mixture(AbstractDistribution):
             'All components must have the same key sets. However detected key '
             'sets {} and {}'.format(self._keys, c.keys))
 
-  def sample(self,uniform, rng=None):
+  def sample(self,uniform, n=None, rng=None):
     rng = self._get_rng(rng)
     sample_index = rng.choice(len(self.components), p=self.probs)
     sample = self.components[sample_index].sample(uniform,rng=rng)
@@ -292,7 +296,7 @@ class Intersection(AbstractDistribution):
             'All components must have the same key sets. However detected key '
             'sets {} and {}'.format(self._keys, c.keys))
 
-  def sample(self,uniform, rng=None):
+  def sample(self,uniform,n=None, rng=None):
     rng = self._get_rng(rng)
     tries = 0
     while tries < _MAX_TRIES:
@@ -340,7 +344,7 @@ class Product(AbstractDistribution):
           'All components must have different keys, yet there are {} '
           'overlapping keys.'.format(num_keys - len(self._keys)))
 
-  def sample(self,uniform, rng=None):
+  def sample(self,uniform,n=None, rng=None):
     rng = self._get_rng(rng)
     sample = {}
     for c in self.components:
@@ -383,7 +387,7 @@ class SetMinus(AbstractDistribution):
           'distribution.'
           .format(hold_out.keys, base.keys))
 
-  def sample(self,uniform, rng=None):
+  def sample(self,uniform,n=None, rng=None):
     rng = self._get_rng(rng)
     tries = 0
     while tries < _MAX_TRIES:
@@ -433,7 +437,7 @@ class Selection(AbstractDistribution):
           'Keys {} of filtering is not a subset of keys {} of Selection base '
           'distribution.'.format(filtering.keys, base.keys))
 
-  def sample(self,uniform, rng=None):
+  def sample(self,uniform,n=None, rng=None):
     rng = self._get_rng(rng)
     tries = 0
     while tries < _MAX_TRIES:
