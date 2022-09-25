@@ -196,6 +196,7 @@ class Discrete(AbstractDistribution):
     self.probs = probs
 
   def sample(self, uniform, n=None, rng=None):
+    print("hhhhhh")
     if n == 0:
       self.candidates = ['triangle']
     elif n == 1:
