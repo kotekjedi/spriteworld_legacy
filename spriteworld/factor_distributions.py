@@ -50,7 +50,7 @@ class AbstractDistribution(object):
   """Abstract class from which all distributions should inherit."""
 
   @abc.abstractmethod
-  def sample(self,n=None,rng=None):
+  def sample(self,n,rng=None):
     """Sample a spec from this distribution. Returns a dictionary.
     Args:
       rng: Random number generator. Fed into self._get_rng(), if None defaults
@@ -195,7 +195,7 @@ class Discrete(AbstractDistribution):
     self.key = key
     self.probs = probs
 
-  def sample(self, uniform, n=None, rng=None):
+  def sample(self, uniform, n, rng=None):
     print(n)
     if n == 0:
       out = "triangle"
