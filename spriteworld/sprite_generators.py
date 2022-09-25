@@ -46,7 +46,7 @@ def generate_sprites(factor_dist, num_sprites=1):
     gaussian = np.random.multivariate_normal(mean, cov, 1)
     uniform = norm.cdf(gaussian)
     n = num_sprites() if callable(num_sprites) else num_sprites
-    sprites = [sprite.Sprite(**factor_dist.sample(uniform,n)) for _ in range(n)]
+    sprites = [sprite.Sprite(**factor_dist.sample(uniform,n=i)) for i in range(n)]
 
     return sprites
 
