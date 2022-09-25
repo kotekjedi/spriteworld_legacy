@@ -27,6 +27,7 @@ from scipy.stats import norm
 import scipy
 
 def generate_sprites(factor_dist, num_sprites=1):
+  print("hiiii")
   """Create callable that samples sprites from a factor distribution.
   Args:
     factor_dist: The factor distribution from which to sample. Should be an
