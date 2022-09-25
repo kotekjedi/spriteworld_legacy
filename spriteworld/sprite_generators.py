@@ -78,6 +78,7 @@ def chain_generators(*sprite_generators):
 
 
 def sample_generator(sprite_generators, p=None):
+  print("hello world")
   """Sample one element from a set of sprite generators.
   Essential an 'OR' operation over sprite generators. This returns a callable
   that samples a generator from sprite_generators and calls it.
