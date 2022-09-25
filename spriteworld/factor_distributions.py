@@ -196,13 +196,12 @@ class Discrete(AbstractDistribution):
     self.probs = probs
 
   def sample(self, uniform, n=None, rng=None):
-    print("hhhhhh")
     if n == 0:
-      self.candidates = ['triangle']
+      out = "triangle"
     elif n == 1:
-      self.candidates = ['square']
-    rng = self._get_rng(rng)
-    out = self.candidates[rng.choice(len(self.candidates), p=self.probs)]
+      out = "square"
+    #rng = self._get_rng(rng)
+    #out = self.candidates[rng.choice(len(self.candidates), p=self.probs)]
     print(out)
     return {self.key: out}
 
