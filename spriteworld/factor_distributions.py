@@ -350,7 +350,7 @@ class Product(AbstractDistribution):
     rng = self._get_rng(rng)
     sample = {}
     for c in self.components:
-      sample.update(c.sample(uniform,rng=rng))
+      sample.update(c.sample(uniform,n=n,rng=rng))
     return sample
 
   def contains(self, spec):
