@@ -196,7 +196,6 @@ class Discrete(AbstractDistribution):
     self.probs = probs
 
   def sample(self, uniform, n, rng=None):
-    print(n)
     if n == 0:
       out = "triangle"
     elif n == 1:
@@ -205,7 +204,6 @@ class Discrete(AbstractDistribution):
       out="circle"
     #rng = self._get_rng(rng)
     #out = self.candidates[rng.choice(len(self.candidates), p=self.probs)]
-    print(out)
     return {self.key: out}
 
   def contains(self, spec):
