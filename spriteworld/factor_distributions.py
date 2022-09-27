@@ -201,6 +201,8 @@ class Discrete(AbstractDistribution):
       out = "triangle"
     elif n == 1:
       out = "square"
+    elif n==2:
+      out="circle"
     #rng = self._get_rng(rng)
     #out = self.candidates[rng.choice(len(self.candidates), p=self.probs)]
     print(out)
