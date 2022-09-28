@@ -140,11 +140,14 @@ class Beta(AbstractDistribution):
 
     if self.non_ident == False:
       if self.key == 'x' and n == 0:
-        self.alpha = 4.
-        self.beta = 15.
+        self.alpha = 2.
+        self.beta = 18.
       elif self.key == 'x' and n == 1:
-        self.alpha = 15.
-        self.beta = 4.
+        self.alpha = 18.
+        self.beta = 18.
+      elif self.key == 'x' and n == 2:
+        self.alpha = 18.
+        self.beta = 2.
       out = beta_dist(torch.tensor([self.alpha]), torch.tensor([self.beta])).sample()
       if self.key == 'x':
         out = out*0.55 + .2
