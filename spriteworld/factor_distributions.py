@@ -139,6 +139,7 @@ class Beta(AbstractDistribution):
     """Sample value in [self.minval, self.maxval) and return dict."""
 
     if self.non_ident == False:
+      '''
       if self.key == 'x' and n == 0:
         self.alpha = 2.
         self.beta = 18.
@@ -148,6 +149,7 @@ class Beta(AbstractDistribution):
       elif self.key == 'x' and n == 2:
         self.alpha = 18.
         self.beta = 2.
+      '''
       out = beta_dist(torch.tensor([self.alpha]), torch.tensor([self.beta])).sample()
       if self.key == 'x':
         out = out*0.55 + .2
