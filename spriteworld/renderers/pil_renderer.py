@@ -77,7 +77,7 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
     Returns:
       Numpy uint8 RGB array of size self._image_size + (3,).
     """
-    plt.imshow(np.asarray(self._canvas_bg).permute(1,2,0))
+    plt.imshow(torch.from_numpy(np.asarray(self._canvas_bg)).permute(1,2,0).numpy())
     plt.show()
     self._canvas.paste(self._canvas_bg)
     for obj in sprites:
