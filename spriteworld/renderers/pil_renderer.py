@@ -78,14 +78,17 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
     Returns:
       Numpy uint8 RGB array of size self._image_size + (3,).
     """
-    test = self._canvas_bg.resize(self._image_size, resample=Image.ANTIALIAS)
-    plt.imshow(torch.from_numpy(np.asarray(test)).numpy())
-    plt.show()
     self._canvas.paste(self._canvas_bg)
     for obj in sprites:
       vertices = self._canvas_size * obj.vertices
       color = self._color_to_rgb(obj.color)
       self._draw.polygon([tuple(v) for v in vertices], fill=color)
+      im = Image.new('RGB', self._canvas_size)
+      ImageDraw.Draw(im).polygon([tuple(v) for v in vertices], fill=color)
+      im.resize(self._image_size, resample=Image.ANTIALIAS)
+      plt.imshow(torch.from_numpy(np.asarray(im)).numpy())
+      plt.show()
+      
     image = self._canvas.resize(self._image_size, resample=Image.ANTIALIAS)
 
     # PIL uses a coordinate system with the origin (0, 0) at the upper-left, but
