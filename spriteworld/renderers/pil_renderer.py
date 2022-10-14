@@ -76,6 +76,7 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
     Returns:
       Numpy uint8 RGB array of size self._image_size + (3,).
     """
+    print(self._canvas_bg.shape)
     self._canvas.paste(self._canvas_bg)
     for obj in sprites:
       vertices = self._canvas_size * obj.vertices
