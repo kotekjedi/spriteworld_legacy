@@ -23,6 +23,7 @@ from dm_env import specs
 import numpy as np
 from PIL import Image
 from PIL import ImageDraw
+import torch
 from spriteworld.renderers import abstract_renderer
 from matplotlib import pyplot as plt
 
