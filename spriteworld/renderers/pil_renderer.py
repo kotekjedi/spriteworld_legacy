@@ -86,7 +86,8 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
       im = Image.new('RGB', self._canvas_size)
       ImageDraw.Draw(im).polygon([tuple(v) for v in vertices], fill=color)
       im.resize(self._image_size, resample=Image.ANTIALIAS)
-      plt.imshow(torch.from_numpy(np.asarray(im)).numpy())
+      print(im.shape)
+      plt.imshow(np.asarray(im))
       plt.show()
       
     image = self._canvas.resize(self._image_size, resample=Image.ANTIALIAS)
