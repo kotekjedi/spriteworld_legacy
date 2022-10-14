@@ -99,6 +99,9 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
     image = np.flipud(np.array(image))
     plt.imshow(image)
     plt.show()
+    
+    plt.imshow(image-im)
+    plt.show()
     return image
 
   def observation_spec(self):
