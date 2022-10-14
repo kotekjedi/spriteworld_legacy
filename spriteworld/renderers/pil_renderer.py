@@ -24,6 +24,7 @@ import numpy as np
 from PIL import Image
 from PIL import ImageDraw
 from spriteworld.renderers import abstract_renderer
+from matplotlib import pyplot as plt
 
 
 class PILRenderer(abstract_renderer.AbstractRenderer):
@@ -76,7 +77,8 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
     Returns:
       Numpy uint8 RGB array of size self._image_size + (3,).
     """
-    print(np.asarray(self._canvas_bg).shape)
+    plt.imshow(np.asarray(self._canvas_bg).permute(1,2,0))
+    plt.show()
     self._canvas.paste(self._canvas_bg)
     for obj in sprites:
       vertices = self._canvas_size * obj.vertices
