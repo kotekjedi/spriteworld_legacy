@@ -91,6 +91,8 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
       plt.show()
       
     image = self._canvas.resize(self._image_size, resample=Image.ANTIALIAS)
+    plt.imshow(np.asarray(image))
+    plt.show()
 
     # PIL uses a coordinate system with the origin (0, 0) at the upper-left, but
     # our environment uses an origin at the bottom-left (i.e. mathematical
