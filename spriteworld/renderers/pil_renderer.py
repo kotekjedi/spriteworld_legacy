@@ -86,19 +86,19 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
       im = Image.new('RGB', self._canvas_size)
       ImageDraw.Draw(im).polygon([tuple(v) for v in vertices], fill=color)
       im = im.resize(self._image_size, resample=Image.ANTIALIAS)
-      print(np.asarray(im).shape)
-      plt.imshow(np.asarray(im))
+      im = np.flipud(np.array(im))
+      plt.imshow(im)
       plt.show()
       
     image = self._canvas.resize(self._image_size, resample=Image.ANTIALIAS)
-    plt.imshow(np.asarray(image))
-    plt.show()
 
     # PIL uses a coordinate system with the origin (0, 0) at the upper-left, but
     # our environment uses an origin at the bottom-left (i.e. mathematical
     # convention). Hence we need to flip the render vertically to correct for
     # that.
     image = np.flipud(np.array(image))
+    plt.imshow(image)
+    plt.show()
     return image
 
   def observation_spec(self):
