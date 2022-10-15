@@ -79,6 +79,7 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
       Numpy uint8 RGB array of size self._image_size + (3,).
     """
     self._canvas.paste(self._canvas_bg)
+    ims = []
     for obj in sprites:
       vertices = self._canvas_size * obj.vertices
       color = self._color_to_rgb(obj.color)
@@ -87,8 +88,7 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
       ImageDraw.Draw(im).polygon([tuple(v) for v in vertices], fill=color)
       im = im.resize(self._image_size, resample=Image.ANTIALIAS)
       im = np.flipud(np.array(im))
-      plt.imshow(im)
-      plt.show()
+      ims.append(im)
       
     image = self._canvas.resize(self._image_size, resample=Image.ANTIALIAS)
 
@@ -97,12 +97,8 @@ class PILRenderer(abstract_renderer.AbstractRenderer):
     # convention). Hence we need to flip the render vertically to correct for
     # that.
     image = np.flipud(np.array(image))
-    plt.imshow(image)
-    plt.show()
-    
-    plt.imshow(image-im)
-    plt.show()
-    return image
+    ims.append(image)
+    return ims
 
   def observation_spec(self):
     return self._observation_spec
