@@ -55,7 +55,7 @@ class Sprite(object):
   def __init__(self,
                x=0.5,
                y=0.5,
-               shape='square',
+               shape='circle',
                angle=0,
                scale=0.1,
                c0=0,
