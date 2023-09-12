@@ -42,15 +42,6 @@ setup(
     packages=find_packages(
         exclude=['*.tests', '*.tests.*', 'tests.*', 'tests']),
     install_requires=[
-        'absl-py',
-        'dm_env',
-        'enum34',
-        'matplotlib',
-        'mock',
-        'numpy',
-        'pillow',
-        'scikit-learn',
-        'six',
     ],
     tests_require=[
         'nose',
